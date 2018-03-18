@@ -1,8 +1,11 @@
 import socket
 from random import *
 host = ("172.16.82.242",9476)
-s = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
-#s.connect(host)
+s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+s.bind(("172.16.82.242",9476))
+s.listen(5)
+connection,address = s.accept()
+print "Address = ",address
 i = 0
 P =[]
 while(1):
