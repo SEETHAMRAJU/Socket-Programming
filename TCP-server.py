@@ -1,20 +1,25 @@
 import socket
 from random import *
-host = ("172.16.82.242",9476)
+import socket
+from random import *
+port = randint(5000,9000)
 s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-s.bind(("172.16.82.242",9476))
-s.listen(5)
+s.bind(("",8559))
+s.listen(1)
 connection,address = s.accept()
-print "Address = ",address
-i = 0
 P =[]
 while(1):
-    while(i<5):
-        p = randint(1,10)
-        P.append(p)
-        s.sendto(str(p),host)
-        i += 1
-    print "Given array = "+str(P)
-    data,addr = s.recvfrom(1024)
-    print data
+    i = 0
+    #while(i<5):
+    #    d = s.recv(1024)
+    #    P.append(int(d))
+    #    i += 1
+    d = connection.recv(1024)
+    d = map(int , d.split())
+    d.sort()       
+    i = 0
+    print d
+    connection.send(str(d))
+    connection.close()    
+    print "Connection Closed"
     break
